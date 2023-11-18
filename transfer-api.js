@@ -1,5 +1,5 @@
-const stripe = require('stripe')('sk_test_your_key');
 require('dotenv').config();
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const createTransfer = async() => {
     const transfer = await stripe.transfers.create({
