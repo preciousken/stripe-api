@@ -1,0 +1,23 @@
+require('dotenv').config();
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
+async function payoutToNigeriaBank() {
+    try {
+
+        const account = await stripe.accounts.create({
+          type: 'custom',
+          country: 'US',
+          email: 'jenny.rosen@example.com',
+          capabilities: {
+            card_payments: {requested: true},
+            transfers: {requested: true},
+          },
+        });
+        console.log(account)
+    } catch (error) {
+      console.error('Error initiating payout:', error);
+    }
+  }
+  
+  // Call the function to initiate the payout
+  payoutToNigeriaBank();
